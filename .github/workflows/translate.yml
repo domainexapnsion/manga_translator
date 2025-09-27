@@ -1,0 +1,23 @@
+name: Daily Manga Translation
+on:
+  schedule:
+    - cron: '0 0 * * *'  # daily 6 AM UTC
+  workflow_dispatch:
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with: python-version: 3.11
+      - run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+      - run: |
+          source venv/bin/activate
+          python manga_translator.py
+        env:
+          BLOGGER_API_KEY: ${{ secrets.BLOGGER_API_KEY }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
