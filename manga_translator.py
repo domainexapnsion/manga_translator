@@ -411,7 +411,7 @@ class BloggerUploader:
         for i, img_path in enumerate(image_paths):
             # In a real implementation, you'd upload images to a CDN or image hosting service
             # For now, we'll use placeholder - you'll need to implement image upload
-            html += f'''<img src="data:image/jpeg;base64,placeholder" 
+            html += f'''<img src="https://via.placeholder.com/800x1200/ffffff/000000?text=Page+{i+1}" 
                        alt="Page {i+1}" 
                        style="width:100%; max-width:800px; margin:10px auto; display:block; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"><br>'''
         
