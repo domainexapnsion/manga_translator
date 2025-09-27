@@ -409,12 +409,20 @@ class BloggerUploader:
             <div class="chapter-images" style="margin: 20px 0;">
         '''
         
-        for i, img_path in enumerate(image_paths):
-            # In a real implementation, you'd upload images to a CDN or image hosting service
-            # For now, we'll use placeholder - you'll need to implement image upload
-            html += f'''<img src="https://via.placeholder.com/800x1200/ffffff/000000?text=Page+{i+1}" 
+       # NEW, CORRECTED CODE
+for i, img_path in enumerate(image_paths):
+    try:
+        with open(img_path, "rb") as image_file:
+            # Read the image data and encode it in Base64
+            encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
+            
+            # Embed the Base64 data directly into the img src
+            html += f'''<img src="data:image/jpeg;base64,{encoded_string}" 
                        alt="Page {i+1}" 
                        style="width:100%; max-width:800px; margin:10px auto; display:block; border-radius:8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"><br>'''
+    except Exception as e:
+        logger.error(f"Could not read or encode image {img_path}: {e}")
+        
         
         html += f'''
             </div>
