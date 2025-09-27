@@ -9,6 +9,7 @@ import sys
 import json
 import time
 import random
+import base64
 import logging
 from datetime import datetime, timedelta
 from pathlib import Path
